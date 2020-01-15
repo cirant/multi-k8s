@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: nginx # telling the kubernete this ingress in based on nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$1 #rewrite le original route to remove /api before sended the request to pod
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /?(.*)
+            backend:
+              serviceName: client-cluster-ip-service # name of the service in metadata
+              servicePort: 3000
+          - path: /api/?(.*)
+            backend:
+              serviceName: server-cluster-ip-service # name of the service in metadata
+              servicePort: 5000

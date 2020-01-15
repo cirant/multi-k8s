@@ -5,7 +5,7 @@ metadata:
 spec: 
   type: ClusterIP 
   selector: 
-    component: postgres
+    component: postgres # name to apply this service. see *A1 inside postgres-deployment.yaml to find out target
   ports: 
     - port: 5432
       targetPort: 5432

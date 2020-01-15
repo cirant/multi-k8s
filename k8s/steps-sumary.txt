@@ -1,0 +1,13 @@
+
+
+# setup minikube 
+minikube start
+
+# apply pods 
+kubectl apply -f k8s
+
+# creating a secret password
+kubectl create secret generic pgpassword --from-literal PGPASSWORD=12345asdf
+
+# install router handler
+....
