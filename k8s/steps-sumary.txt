@@ -11,3 +11,15 @@ kubectl create secret generic pgpassword --from-literal PGPASSWORD=12345asdf
 
 # install router handler
 ....
+
+
+
+# creating service accont to give yarvis access to modify google cloud
+
+kubectl create serviceaccount --namespace kube-system tiller
+
+# creating role bining
+# --serviceaccount=kube-system:tiller ===>  kube-system = namespace created at before step and tiller from before step
+kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+
+helm install stable/nginx-ingress --name my-nginx --set rbac.create=true
